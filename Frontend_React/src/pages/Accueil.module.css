@@ -1,0 +1,184 @@
+/* Global styles */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styles */
+.conteneurAccueil1 {
+    padding: 5px;
+    margin: 1px;
+    background-color: #474545;
+}
+
+.conteneurAccueil1 span {
+    color: #fb911f;
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+/* Grid layout */
+.gridcontainer {
+    display: grid;
+    grid-template-areas:
+        'header header header header header'
+        'menu main main right right'
+        'menu footer footer footer footer';
+    gap: 5px;
+    background-color: #f2f2f2;
+    grid-template-columns: repeat(5, 20%);
+}
+
+/* Header area styles */
+.item1 {
+    grid-area: header;
+    background-color: #07673f;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 99%;
+}
+
+/* Menu area styles */
+.item2 {
+    grid-area: menu;
+    background-color: #182a22;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px 10px;
+    border: solid white;
+    border-radius: 30px;
+}
+
+/* Main and right area styles */
+.item3,
+.item4 {
+    grid-area: main;
+    height: 300px;
+    display: flex;
+    width: 100%;
+    margin: 10px;
+}
+
+.item4 {
+    grid-area: right;
+}
+
+/* Footer area styles */
+.item5 {
+    grid-area: footer;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+/* Content styles */
+.item3 img,
+.item4 img {
+    width: 90%;
+    height: 100%;
+    object-fit: contain;
+    border: 3px solid #ae1c1c;
+    padding: 10px;
+    box-shadow: 5px 5px;
+    border-radius: 30px;
+}
+
+/* Result presentation styles */
+.resultaPresict {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    width: 100%;
+}
+
+.start {
+    flex: 1;
+    color: #fff;
+}
+
+/* Column styles */
+.column {
+    flex: 1;
+    padding: 0px 5px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    margin: 5px;
+}
+
+.column p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(235, 228, 228);
+    text-align: left;
+    margin: 10px 25px;
+}
+
+/* Button styles */
+.button,
+label {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0px;
+    margin: 10px 10px;
+    border: 2px solid #4CAF50;
+    border-radius: 30px;
+    box-shadow: #333;
+    cursor: pointer;
+    font-size: 18px;
+    text-align: center;
+    width: 90%;
+}
+
+/* Hover effect for buttons */
+.button:hover {
+    background-color: #1b7220;
+}
+
+/* Additional styles */
+.divGlob {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: aliceblue;
+    padding: 2px 30px;
+    background-color: #0f6112;
+}
+
+/* Result prediction styles */
+.resultPreduc,
+.preduct {
+    display: flex;
+    width: 95%;
+    background-color: rgb(3, 71, 49);
+    align-content: start;
+    color: aliceblue;
+    font-size: 1.5em;
+    border-radius: 5px;
+}
+
+.resultPreduc {
+    border-radius: 30px;
+    margin: 10px;
+}
+
+/* Container styles */
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+/* Input and select styles */
+input,
+select {
+    width: 200px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #f2f2f2;
+    color: #333;
+    border-radius: 5px;
+}

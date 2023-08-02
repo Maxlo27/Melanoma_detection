@@ -1,0 +1,45 @@
+/* CsvViewer.css */
+.tablecontainer{
+    padding: 1px;
+    
+
+    background-color: #474545;
+    color: #fff;
+
+}
+.tablecontainer span {
+    color: #fb911f;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+
+.csvtable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.csvtable th,
+.csvtable td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: left;
+}
+
+.csvtable th {
+    background-color: rgb(3, 71, 49);
+    align-content: start;
+    margin: 5px;
+    color: aliceblue;
+    font-weight: bold;
+}
+
+.resultPreduc {
+    width: 60%;
+    background-color: rgb(3, 71, 49);
+    align-content: start;
+    margin: 5px;
+    color: aliceblue;
+}
+

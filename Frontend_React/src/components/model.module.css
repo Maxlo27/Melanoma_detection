@@ -1,0 +1,68 @@
+/* CSS pour les étiquettes du formulaire */
+label {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  padding: 10px;
+}
+
+/* CSS pour les champs de saisie du formulaire */
+input,
+select {
+
+  padding: 8px;
+  margin-left: 5px;
+  align-items: center;
+
+  border: 1px solid #104532;
+  border-radius: 5px;
+}
+
+select {
+  margin-left: 10px;
+
+}
+
+
+/* CSS pour le bouton "Archiver" */
+button {
+  padding: 10px 20px;
+  background-color: #bc6b23;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  padding: 10px 0px;
+  margin: 10px 10px;
+  font-size: 18px;
+  text-align: center;
+  width: 90%;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+}
+
+p {
+  color: #ffffff;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+
+}
+.conteneur{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  width: 90%;
+}

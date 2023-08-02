@@ -1,0 +1,63 @@
+/* Header.css */
+
+.headercontainer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo a {
+  color: #fff;
+  font-size: 24px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease; /* Transition sur la couleur du lien */
+}
+
+.logo a:hover {
+  text-decoration: underline;
+}
+
+.navmenu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navmenu li {
+  margin-right: 20px;
+}
+
+.navmenu li:last-child {
+  margin-right: 0;
+}
+
+.navmenu a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  transition: color 0.3s ease; /* Transition sur la couleur du lien */
+}
+
+.navmenu a:hover {
+  text-decoration: underline;
+  color: #ffcc00; /* Changement de couleur au survol */
+}
+
+/* Effet d'expansion pour les liens du menu */
+.navmenu.expanded li {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Animation de transition pour l'expansion */
+.navmenu.expanding li {
+  transform: translateX(20px);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
