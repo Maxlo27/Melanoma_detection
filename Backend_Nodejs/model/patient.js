@@ -26,7 +26,8 @@ export const addPatient = async (
   energy,
   correlation,
   pourcentage_malin,
-  pourcentage_benin
+  pourcentage_benin,
+  target
 ) => {
   try {
     let connection = await connectionPromise;
@@ -46,9 +47,10 @@ export const addPatient = async (
         energy,
         correlation,
         pourcentage_malin,
-        pourcentage_benin
+        pourcentage_benin,
+        target
       )
-      VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);`,
+      VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);`,
       [
         Id_patient,
         chemin,
@@ -65,6 +67,7 @@ export const addPatient = async (
         correlation,
         pourcentage_malin,
         pourcentage_benin,
+        target
       ]
     );
 
@@ -86,6 +89,16 @@ export const getPatientByImageName = async (idpatient) => {
 
   return result;
 };
+export const emptyPatient = async () => {
+  let connection = await connectionPromise;
+
+  await connection.run(
+      'DELETE FROM patient1;'
+  );
+}
+
+
+
 
 
 

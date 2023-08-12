@@ -14,53 +14,13 @@ const PatientSearchInterface = () => {
     try {
       const response = await axios.get(`http://localhost:5000/patient/${idPatient}`);
       setPatientData(response.data);
+
       console.log(response);
     } catch (error) {
       console.error('Erreur lors de la recherche du patient :', error);
     }
   };
 
- /*  const displayBlobImage = async (blobUrl) => {
-    try {
-      const response = await axios.get(blobUrl, { responseType: 'blob' });
-      const blob = response.data;
-
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-
-        reader.onload = function () {
-          const blobAsDataUrl = reader.result;
-          resolve(blobAsDataUrl);
-        };
-
-        reader.onerror = function (error) {
-          reject(error);
-        };
-
-        reader.readAsDataURL(blob);
-      });
-    } catch (error) {
-      console.error('Erreur lors de la récupération de l\'image :', error);
-      throw error;
-    }
-  };
-
-  const fetchAndDisplayImages = async () => {
-    const imagePromises = patientData.map(async (data) => {
-      const imageSrc = await displayBlobImage(data.chemin);
-      return imageSrc;
-    });
-
-    const resolvedImageSrcs = await Promise.all(imagePromises);
-    setImageSrcs(resolvedImageSrcs);
-  };
-
-  useEffect(() => {
-    if (patientData.length > 0) {
-      fetchAndDisplayImages();
-    }
-  }, [patientData]);
- */
 
 
 
@@ -97,6 +57,8 @@ const PatientSearchInterface = () => {
                 <th>Correlation</th>
                 <th>Pourcentage Malin</th>
                 <th>Pourcentage Benin</th>
+                <th>Diagnostic du dermatologue</th>
+
                 {/* Ajoutez d'autres en-têtes en fonction des données que vous récupérez */}
               </tr>
             </thead>
@@ -119,6 +81,7 @@ const PatientSearchInterface = () => {
                   <td>{data.correlation}</td>
                   <td>{data.pourcentage_malin}</td>
                   <td>{data.pourcentage_benin}</td>
+                  <td>{data.target}</td>
 
                 </tr>
               ))}

@@ -14,19 +14,19 @@ export default function Nav() {
                     <Link to="/">Accueil</Link>
                 </li>
                 <li>
-                    <Link to="/contact">Dataset</Link>
+                    <Link to="/dataset">Dataset</Link>
                 </li>
                 <li>
-                    <Link to="/detaitPatient">Detaille</Link>
+                    <Link to="/detaitPatient">Détail</Link>
                 </li>
                 <li>
-                    <Link to="/contact">Contact</Link>
+                    <Link to="/contact"></Link>
                 </li>
                 <li>
-                    <Link to="/test">Test</Link>
+                    <Link to="/test"></Link>
                 </li>
                 <li>
-                    <Link to="/hassan">Test2</Link>
+                    <Link to="/hassan">Delete</Link>
                 </li>
             </ul>
         </nav>

@@ -1,154 +1,104 @@
-import React, { useState, useEffect } from 'react';
-import styles from './test.module.css'; // Assurez-vous d'importer correctement les styles
+import React, { useState } from 'react';
 import axios from 'axios';
-const imageTypeRegex = /image\/(png|jpg|jpeg)/gm;
+import styles from "../pages/detailPatient.module.css";
+import PatientSearchInterface1 from '../components/p';
 
-function Test2() {
+const PatientSearchInterface = () => {
+  const [idPatient, setIdPatient] = useState('');
+  const [patientData, setPatientData] = useState([]);
+  const [message, setMessage] = useState('');
 
+  const handleSearchSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.get(`http://localhost:5000/patient/${idPatient}`);
+      setPatientData(response.data);
+      setMessage(''); // Réinitialiser le message
+    } catch (error) {
+      console.error('Erreur lors de la recherche du patient :', error);
+    }
+  };
 
+  const handleEmptyPatient = () => {
+    axios.delete('http://localhost:5000/patient')
+      .then(response => {
+        setMessage(response.data);
+        setPatientData([]); // Vider les données du patient affichées
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
 
+  return (
+    <div className={styles.conteneur}>
+      <div className={styles.conteneur2}>
+        <form onSubmit={handleSearchSubmit}>
+          <label>
+            Entrez l'ID du patient :
+            <input type="text" value={idPatient} onChange={(e) => setIdPatient(e.target.value)} />
+          </label>
+          <button type="submit">Exécuter</button>
+        </form>
+      </div>
+      <div className={styles.resultat}>
+        {patientData && (
+          <table className={styles.tableau}>
+              <thead>
+              <tr>
+                <th>ID</th>
 
-    
+                <th>Image</th>
+                <th>ID Patient</th>
+                <th>Image Name</th>
+                <th>Sexe</th>
+                <th>Localisation</th>
+                <th>Âge</th>
+                <th>Bordure</th>
+                <th>Diamètre</th>
+                <th>Symétrie</th>
+                <th>Contrast</th>
+                <th>Homogeneity</th>
+                <th>Energy</th>
+                <th>Correlation</th>
+                <th>Pourcentage Malin</th>
+                <th>Pourcentage Benin</th>
+                {/* Ajoutez d'autres en-têtes en fonction des données que vous récupérez */}
+              </tr>
+            </thead>
+            <tbody>
+              {patientData.map((data, index) => (
+                <tr key={data.id}>
+                  <td>{data.id}</td>
+                  <td><img src={data.chemin} alt="Image" /></td>
+                  <td>{data.Id_patient}</td>
+                  <td>{data.image_name}</td>
+                  <td>{data.sexe}</td>
+                  <td>{data.localisation}</td>
+                  <td>{data.age}</td>
+                  <td>{data.bordure}</td>
+                  <td>{data.diametre}</td>
+                  <td>{data.symetrie}</td>
+                  <td>{data.contrast}</td>
+                  <td>{data.homogeneity}</td>
+                  <td>{data.energy}</td>
+                  <td>{data.correlation}</td>
+                  <td>{data.pourcentage_malin}</td>
+                  <td>{data.pourcentage_benin}</td>
 
-
-
-    const [open, setOpen] = useState(false);
-    const [predictions, setPredictions] = useState(null);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    const [imageFiles, setImageFiles] = useState([]);
-    const [images, setImages] = useState([]);
-    const [diagnostic, setDiagnostic] = useState(null);
-    const [features, setFeatures] = useState(null);
-    const [id, setId] = useState("");
-    const [age, setAge] = useState("");
-    const [sex, setSex] = useState("");
-    const [localisation, setLocalisation] = useState("");
-
-    const handleClick = () => {
-        if (imageFiles.length != 0) {
-            const formData = new FormData();
-            formData.append('image', imageFiles[0]);
-
-            axios.post('http://127.0.0.1:5001/predict', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-                .then((response) => {
-                    console.log(response)
-                    setPredictions(response.data.features[0])
-                    // Update the state with the predictions received from the server
-                    // setFeatures(response.data.features[0]);
-                    // setDiagnostic(response.data.diagnostic[0]);
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        } else {
-            console.log('No image selected.');
-        }
-    };
-    useEffect(() => {
-        const images = [], fileReaders = [];
-        let isCancel = false;
-        if (imageFiles.length) {
-            imageFiles.forEach((file) => {
-                const fileReader = new FileReader();
-                fileReaders.push(fileReader);
-                fileReader.onload = (e) => {
-                    const { result } = e.target;
-                    if (result) {
-                        images.push(result)
-                    }
-                    if (images.length === imageFiles.length && !isCancel) {
-                        setImages(images);
-                    }
-                }
-                fileReader.readAsDataURL(file);
-            })
-        };
-        return () => {
-            isCancel = true;
-            fileReaders.forEach(fileReader => {
-                if (fileReader.readyState === 1) {
-                    fileReader.abort()
-                }
-            })
-        }
-    }, [imageFiles]);
-    const changeHandler = (e) => {
-        const { files } = e.target;
-        const validImageFiles = [];
-        for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            if (file.type.match(imageTypeRegex)) {
-                validImageFiles.push(file);
-            }
-        }
-        if (validImageFiles.length) {
-            setImageFiles(validImageFiles);
-            return;
-        }
-        alert("Selected images are not of valid type!");
-    };
-    return (
-        <div className={styles.container}>
-            <div className={styles.imageContainer}>
-                {
-                    images.length > 0 ?
-                        <div>
-                            {
-                                images.map((image, idx) => {
-                                    return <p key={idx}> <img src={image} alt="" className={styles.image} /> </p>
-                                })
-                            }
-                        </div> : <div className={styles.placeholder}>Aucune image sélectionnée</div>
-                }
-                <label htmlFor="fileInput" className={styles.button}>
-                    Sélectionner un fichier
-                </label>
-                <input
-                    type="file"
-                    id="fileInput"
-                    onChange={changeHandler}
-                    accept="image/png, image/jpg, image/jpeg"
-                    style={{ display: 'none' }}
-                />
-                <button class="button-41" role="button" onClick={handleClick}>Detect Melanome</button>
-            </div>
-            <div className={styles.tableContainer}>
-                <table className={styles.table}>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nom de l'image</th>
-                            <th>Résultat de prédiction</th>
-                            <th>Pourcentage</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {predictions ?
-                            <tr>
-
-                                <td>correlation": {predictions.correlation}</td>
-                                <td>Homogeneity; {predictions.homogeneity}</td>
-                                <td>energy; {predictions.energy}</td>
-                                
-                           
-
-
-
-                            </tr>
-                            : null}
-                    </tbody>
-                </table>
-            </div>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+        {patientData && patientData.length === 0 && <p>Aucun patient trouvé.</p>}
+        <div>
+          <button onClick={handleEmptyPatient}>Vider les données des pateints </button>
+          <p>{message}</p>
         </div>
-    );
+      </div>
+    </div>
+  );
+};
 
-}
-
-
-
-export default Test2;
+export default PatientSearchInterface;

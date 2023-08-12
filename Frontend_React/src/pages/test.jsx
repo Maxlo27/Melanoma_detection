@@ -39,10 +39,22 @@ function Test() {
 
             // Ajouter le chemin du fichier à l'array 'tab'
             setTab((prevTab) => [...prevTab, filePath]);
-          
+
         }
     }
-    console.log("tabjjj",tab)
+    console.log("tabjjj", tab)
+
+    const [message, setMessage] = useState('');
+
+  const handleEmptyPatient = () => {
+    axios.delete('http://localhost:5000/patient')
+      .then(response => {
+        setMessage(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+    };
 
     return (
         <div>
@@ -69,7 +81,11 @@ function Test() {
                         <img key={index} src={imageURL} alt={`Image ${index + 1}`} className={styles.image} />
                     ))}
                 </div>
-                <img src={tab[0]}  className={styles.image} />
+                <img src={tab[0]} className={styles.image} />
+            </div>
+            <div>
+                <button onClick={handleEmptyPatient}>Vider le panier</button>
+                <p>{message}</p>
             </div>
         </div>
     );

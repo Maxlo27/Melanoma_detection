@@ -9,6 +9,8 @@ body {
     padding: 5px;
     margin: 1px;
     background-color: #474545;
+    color: #fff;
+    
 }
 
 .conteneurAccueil1 span {
@@ -24,9 +26,10 @@ body {
         'header header header header header'
         'menu main main right right'
         'menu footer footer footer footer';
-    gap: 5px;
+    gap: 2px;
     background-color: #f2f2f2;
     grid-template-columns: repeat(5, 20%);
+    
 }
 
 /* Header area styles */
@@ -50,9 +53,13 @@ body {
     padding: 50px 10px;
     border: solid white;
     border-radius: 30px;
+    color: #f2f2f2;
+    height: 400px;
+    margin-top: 10px ;
 }
 
 /* Main and right area styles */
+
 .item3,
 .item4 {
     grid-area: main;
@@ -81,7 +88,7 @@ body {
     width: 90%;
     height: 100%;
     object-fit: contain;
-    border: 3px solid #ae1c1c;
+    border: 3px solid #fb911f;
     padding: 10px;
     box-shadow: 5px 5px;
     border-radius: 30px;
@@ -91,7 +98,7 @@ body {
 .resultaPresict {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: flex-start;
     width: 100%;
 }
 
@@ -155,7 +162,7 @@ label {
     display: flex;
     width: 95%;
     background-color: rgb(3, 71, 49);
-    align-content: start;
+    align-content:  flex-start;
     color: aliceblue;
     font-size: 1.5em;
     border-radius: 5px;
@@ -182,3 +189,21 @@ select {
     color: #333;
     border-radius: 5px;
 }
+  
+.ligne{
+    display: flex;
+    flex-direction: row;
+    
+    
+}
+.benin {
+    background-color: #238b6f;
+    padding: 10px;
+
+  }
+  
+  .malin {
+    background-color: #e74c3c;
+    padding: 10px;
+  }
+ 

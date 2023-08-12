@@ -8,7 +8,7 @@ import compression from 'compression';
 import cors from 'cors';
 import cspOption from './csp-options.js'
 
-import { getPatient, addPatient, getPatientByImageName } from './model/patient.js';
+import { getPatient, addPatient, getPatientByImageName, emptyPatient } from './model/patient.js';
 
 // Création du serveur
 const app = express();
@@ -60,7 +60,9 @@ app.post('/patient', async (request, response, next) => {
             energy,
             correlation,
             pourcentage_malin,
-            pourcentage_benin
+            pourcentage_benin,
+            target
+
         } = request.body;
 
         // Effectuez ici la validation des données avant de les envoyer dans le serveur.
@@ -82,7 +84,8 @@ app.post('/patient', async (request, response, next) => {
             energy,
             correlation,
             pourcentage_malin,
-            pourcentage_benin
+            pourcentage_benin,
+            target
         );
 
         // Répondez avec un code de statut 200 (OK) et renvoyez l'ID du nouveau patient ajouté.
@@ -93,11 +96,19 @@ app.post('/patient', async (request, response, next) => {
     }
 });
 
-//route pour avoir un étudiant ou une liste d'etudiants avec son ID
-// Route pour chercher un patient par son ID (image_name)
+
+// Route pour chercher un patient par son ID (idpatient)
 app.get('/patient/:idpatient', async (request, response, next) => {
     try {
         let patient = await getPatientByImageName(request.params.idpatient); // 
+        response.status(200).json(patient); //
+    } catch (error) {
+        next(error);
+    }
+});
+app.delete('/patient', async (request, response, next) => {
+    try {
+        let patient = await emptyPatient(); // 
         response.status(200).json(patient); //
     } catch (error) {
         next(error);
